@@ -1,5 +1,5 @@
 #include <string.h>
-#include <bits/stdc++.h>
+#include <iostream>
 #include <stdlib.h>
 #define TRUE 1
 #define FALSE 0
