@@ -12,16 +12,19 @@ typedef int ElemType; //数据元素类型定义
 #define LIST_INIT_SIZE 100
 #define LISTINCREMENT  10
 typedef int ElemType;
-typedef struct
+struct SqList
 {  //顺序表（顺序结构）的定义
-	ElemType * elem;
+	ElemType* elem;
     int length;
 	int listsize;
-}SqList;
-typedef struct{  //线性表的管理表定义
-     struct { char name[30];
-     		  SqList L;	
-      } elem[10];
-      int length;
-      int listsize;
- }LISTS;
+};
+struct lists
+{
+    char name[30];
+    SqList L;
+};
+struct LISTS{  //线性表的管理表定义
+    lists elem[10];
+    int length;
+    int listsize;
+};

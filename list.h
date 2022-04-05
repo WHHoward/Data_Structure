@@ -211,7 +211,9 @@ status AddList(LISTS &Lists,char ListName[])
     temp.listsize = LIST_INIT_SIZE;
     Lists.elem[Lists.length++].L = temp;
     strcpy(Lists.elem[Lists.length-1].name,ListName);
+    return OK;
 }
+
 status RemoveList(LISTS &Lists,char ListName[])
 {
     for(int i = 0; i < Lists.length; i++)
