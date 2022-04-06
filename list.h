@@ -31,6 +31,7 @@ status ClearList(SqList& L)
     if(L.elem)
     {
         free(L.elem);
+        L.elem = (int *)malloc(sizeof(int) * LIST_INIT_SIZE);
         L.length = 0;
         return OK;
     }
