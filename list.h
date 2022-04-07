@@ -19,6 +19,7 @@ status DestroyList(SqList& L)
         free(L.elem);
         L.elem = NULL;
         L.length = 0;
+        L.listsize = LIST_INIT_SIZE;
         return OK;
     }
     else
@@ -177,9 +178,12 @@ status  SaveList(SqList L,char FileName[])
 {
     if(!L.elem) return INFEASIBLE;
     FILE *p;
-    p = fopen(FileName,"w");
-    for(int i = 0; i < L.length; i++)
-        fprintf(p,"%d",L.elem[i]);
+    p = fopen(FileName,"w+");
+    if(!p)  return ERROR;
+    /*for(int i = 0; i < L.length; i++)
+        fprintf(p,"%d ",L.elem[i]);
+    */
+    fwrite(L.elem,sizeof(int),L.length,p);
     fclose(p);
     return OK;
 }
@@ -190,16 +194,15 @@ status  LoadList(SqList &L,char FileName[])
     else
     {
         L.elem = (int *)malloc(sizeof(int) * L.listsize);
+        L.length = 0;
         FILE *p;
-        p = fopen(FileName,"r");
+        p = fopen(FileName,"rb+");
+        if(!p)  return ERROR;
         int temp;
         int cnt = 1;
-        return OK;
-        while(fscanf(p,"%d",&temp))
-        {
+        //return OK;
+        while(fread(&temp,sizeof(int),1,p))
             ListInsert(L,cnt++,temp);
-            return OK;
-        }
         fclose(p);
         return OK;
     }
@@ -264,5 +267,30 @@ int MaxSubArray(SqList L,int &result,int &front_pos,int &end_pos)
     free(temp);
     temp = NULL;
     result = temp1;
+    return OK;
+}
+
+int SubArrayNum(SqList L,int k)
+{
+    if(!L.elem) return INFEASIBLE;
+    if(L.length == 0)   return -2;
+    int *temp;
+    temp = (int *)malloc(sizeof(int) * (L.length + 1));
+    temp[0] = 0;
+    for(int i = 1; i <= L.length; i++)
+        temp[i] = temp[i - 1] + L.elem[i - 1];
+    int cnt = 0;
+    for(int i = 1; i <= L.length; i++)
+        for(int j = i; j <= L.length; j++)
+            if(temp[j] - temp[i - 1] == k)  cnt++;
+    return cnt;
+}
+
+int SortList(SqList L)
+{
+    if(!L.elem) return INFEASIBLE;
+    if(L.length == 0)   return ERROR;
+    else
+        std::sort(L.elem,L.elem + L.length);
     return OK;
 }

@@ -1,6 +1,8 @@
 #include <string.h>
 #include <iostream>
 #include <stdlib.h>
+#include <algorithm>
+ 
 #define TRUE 1
 #define FALSE 0
 #define OK 1
@@ -24,7 +26,7 @@ struct lists
     SqList L;
 };
 struct LISTS{  //线性表的管理表定义
-    lists elem[10];
+    lists elem[100];
     int length;
     int listsize;
 };
