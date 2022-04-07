@@ -240,3 +240,29 @@ int LocateList(LISTS Lists,char ListName[])
     }
     return 0;
 }
+
+int MaxSubArray(SqList L,int &result,int &front_pos,int &end_pos)
+{
+    if(!L.elem) return INFEASIBLE;
+    if(L.length == 0)   return ERROR;
+    int *temp;
+    temp = (int *)malloc(sizeof(int) * (L.length + 1));
+    temp[0] = 0;
+    for(int i = 1; i <= L.length; i++)
+        temp[i] = temp[i - 1] + L.elem[i - 1];
+    int temp1 = -999999;
+    for(int i = 1; i <= L.length; i++)
+        for(int j = i; j <= L.length; j++)
+        {
+            if(temp1 < temp[j] - temp[i - 1])
+            {
+                temp1 = temp[j] - temp[i - 1];
+                front_pos = i;
+                end_pos = j;
+            }
+        }
+    free(temp);
+    temp = NULL;
+    result = temp1;
+    return OK;
+}

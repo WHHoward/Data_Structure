@@ -14,6 +14,7 @@ int main()
 	    printf("    	  4. ListEmpty      10. ListInsert\n");
 	    printf("    	  5. ListLength     11. ListDelete\n");
 	    printf("    	  6. GetElem        12. ListTraverse\n");
+        printf("          13. MaxSubArray\n");
 	    printf("    	  0. Exit\n");
 	    printf("-------------------------------------------------\n");
 	    printf("    请选择你的操作[0~12]:");
@@ -154,7 +155,7 @@ int main()
                             cout << "你删除的元素为" << value << endl;
                         }
                 else    
-                    cout << "线性表为空" << endl;
+                    cout << "线性表不存在" << endl;
                 break;
             }
             case 12:
@@ -166,7 +167,22 @@ int main()
                     else
                         cout <<endl << "线性表遍历完成" << endl;
                 else
-                    cout << "线性表为空" << endl;
+                    cout << "线性表不存在" << endl;
+                break;
+            }
+            case 13:
+            {
+                cout << "线性表最大连续子数组求和如下" << endl;
+                int temp,temp1,temp2;
+                temp = temp1 = temp2 = 0;
+                int flag = MaxSubArray(L,temp,temp1,temp2);
+                if(flag != INFEASIBLE)
+                    if(flag == ERROR)
+                        cout << "线性表为空" << endl;
+                    else
+                        printf("最大连续子数组为 %d ~ %d 其和为 %d\n",temp1,temp2,temp);
+                else
+                    cout << "线性表不存在" << endl;
                 break;
             }
         }
