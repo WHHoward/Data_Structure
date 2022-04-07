@@ -3,7 +3,7 @@ using namespace std;
 int main()
 {
     SqList L;
-    int op;
+    int op = 1;
     while(op)
     {
         printf("      Menu for Linear Table On Sequence Structure \n");
@@ -13,7 +13,7 @@ int main()
 	    printf("    	  3. ClearList      9. NextElem \n");
 	    printf("    	  4. ListEmpty      10. ListInsert\n");
 	    printf("    	  5. ListLength     11. ListDelete\n");
-	    printf("    	  6. GetElem        12. ListTrabverse\n");
+	    printf("    	  6. GetElem        12. ListTraverse\n");
 	    printf("    	  0. Exit\n");
 	    printf("-------------------------------------------------\n");
 	    printf("    请选择你的操作[0~12]:");
@@ -62,6 +62,55 @@ int main()
                 if(temp != INFEASIBLE)  cout << "线性表的长度为: " << temp << endl; 
                 else    
                     cout << "线性表不存在" << endl;
+                break;
+            }
+            case 6:
+            {
+                cout << "请输入要取出的元素位置" << endl;
+                int temp;
+                cin >> temp;
+                int temp2;
+                int temp3 = GetElem(L,temp,temp2);
+                if(temp3 != INFEASIBLE)
+                    if(temp3 != ERROR)
+                        cout << "你所取出的元素为 " <<  temp2 << endl;
+                    else    
+                        cout << "输入了错误的位置"<< endl;
+                else
+                    cout << "线性表不存在" << endl;
+                break;
+            }
+            case 7:
+            {
+                cout << "请输入你要定位的元素" << endl;
+                int temp;
+                cin >> temp;
+                int flag = LocateElem(L,temp);
+                if(flag != INFEASIBLE)  
+                    if(flag == 0)   cout << "该元素不在该线性表中" << endl;
+                    else
+                        cout << "元素所在位置为" << flag << endl;
+                else    
+                    cout << "线性表不存在" << endl;
+                break;
+            }
+            case 8:
+            {
+                cout << "请输入你要取得前继的元素" << endl;
+                int temp,temp1;
+                cin >> temp;
+                int flag = PriorElem(L,temp,temp1);
+                if(flag != INFEASIBLE)
+                    if(flag == ERROR)
+                        cout << "该元素不在该线性表中或该元素位于该线性表的首位" << endl;
+                    else    
+                        cout << "该元素的前继为" << temp1 << endl;
+                else    
+                    cout << "线性表不存在" << endl;
+                break;
+            }
+            case 9:
+            {
                 break;
             }
         }
