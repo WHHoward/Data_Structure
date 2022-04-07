@@ -111,6 +111,62 @@ int main()
             }
             case 9:
             {
+                cout << "请输入你要取得前继的元素" << endl;
+                int temp,temp1;
+                cin >> temp;
+                int flag = NextElem(L,temp,temp1);
+                if(flag != INFEASIBLE)
+                    if(flag == ERROR)
+                        cout << "该元素不在该线性表中或该元素位于该线性表的末位" << endl;
+                    else    
+                        cout << "该元素的后继为" << temp1 << endl;
+                else    
+                    cout << "线性表不存在" << endl;
+                break;
+            }
+            case 10:
+            {
+                cout << "请输入你要插入的元素以及其位置" << endl;
+                int pos,value;
+                cin >> value >> pos;
+                int flag = ListInsert(L,pos,value);
+                if(flag != INFEASIBLE)
+                    if(flag == ERROR)
+                        cout << "你输入了一个非法的位置" << endl;
+                    else   
+                        cout << "插入成功" << endl;
+                else
+                    cout << "线性表不存在" << endl;
+                break;
+            }
+            case 11:
+            {
+                cout << "请输入你要删除的元素的位置" << endl;
+                int pos,value;
+                cin >> pos;
+                int flag = ListDelete(L,pos,value);
+                if(flag != INFEASIBLE)
+                    if(flag == ERROR)
+                        cout << "你输入了一个非法的位置" << endl;
+                    else    
+                        {
+                            cout << "删除成功" << endl;
+                            cout << "你删除的元素为" << value << endl;
+                        }
+                else    
+                    cout << "线性表为空" << endl;
+                break;
+            }
+            case 12:
+            {
+                cout << "当前线性表如下" << endl;
+                int flag = ListTraverse(L);
+                if(flag != INFEASIBLE)
+                    if(flag == ERROR)   cout << "线性表为空" << endl;
+                    else
+                        cout <<endl << "线性表遍历完成" << endl;
+                else
+                    cout << "线性表为空" << endl;
                 break;
             }
         }

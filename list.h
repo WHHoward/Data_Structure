@@ -164,6 +164,7 @@ status ListTraverse(SqList L)
     if(!L.elem) return INFEASIBLE;
     else
     {
+        if(L.length == 0)   return ERROR;
         for(int i = 0; i < L.length - 1; i++)
             printf("%d ",L.elem[i]);
         if(L.length != 0)
@@ -230,7 +231,6 @@ status RemoveList(LISTS &Lists,char ListName[])
     return ERROR;
 }
 
-#include<string.h>
 int LocateList(LISTS Lists,char ListName[])
 {
     for(int i = 0; i < Lists.length; i++)
