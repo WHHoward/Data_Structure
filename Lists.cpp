@@ -20,10 +20,13 @@ int main()
 	    printf("    	  6. GetElem        12. ListTraverse\n");
         printf("          13. MaxSubArray   14.SubArrayNum\n");
         printf("          15.SortList       16.SaveList\n");
-        printf("          17.LoadList       18.AddList\n");
+        printf("          17.LoadList       18.AddList_1\n");
+        printf("          19.AddList_2      20.LocateList\n");
+        printf("          21.RemoveList     22.ShowList\n");
+        printf("          23.SwitchList     24.UpdateList\n");
 	    printf("    	  0. Exit\n");
 	    printf("-------------------------------------------------\n");
-	    printf("    请选择你的操作[0~12]:");
+	    printf("    请选择你的操作[0~24]:");
         cin >> op;
         switch (op)
         {
@@ -243,8 +246,96 @@ int main()
                     if(temp == OK)  cout << "线性表加载成功" << endl;
                     else    cout << "文件打开失败" << endl;
                 else
-                    cout << "线性表不存在" << endl;   
+                    cout << "线性表已存在无法写入" << endl;   
                 free(s);
+                break;
+            }
+            case 18:
+            {
+                cout << "将创建一个空的线性表插入在线性表组的末尾" << endl;
+                cout << "请输入该线性表的名字" << endl;
+                char *s;
+                s = (char *)malloc(sizeof(char) * 1000);
+                cin >> s;
+                int temp = AddList_1(Lists,s);
+                cout << "插入成功" << endl;
+                free(s);
+                break;
+            }
+            case 19:
+            {
+                cout << "将当前的线性表插入到线性表组的末尾" << endl;
+                cout << "请输入该线性表的名字" << endl;
+                char *s;
+                s = (char *)malloc(sizeof(char) * 1000);
+                cin >> s;
+                int temp = AddList_2(Lists,s,L);
+                if(temp != INFEASIBLE)
+                    cout << "插入成功" << endl;
+                else
+                    cout << "线性表不存在" << endl;
+                free(s);
+                break;
+            }
+            case 20:
+            {
+                cout << "请输入需要定位的线性的名字" << endl;
+                char *s;
+                s = (char *)malloc(sizeof(char) * 1000);
+                cin >> s;
+                int temp = LocateList(Lists,s);
+                if(temp)
+                    cout << "线性表在组中的位置为 " << temp << endl;
+                else    
+                    cout << "未在线性表组中找到该线性表" << endl;
+                free(s);
+                break;
+            }
+            case 21:
+            {
+                cout << "请输入需要删除的线性表的名字" << endl;
+                char *s;
+                s = (char *)malloc(sizeof(char) * 1000);
+                cin >> s;
+                int temp = RemoveList(Lists,s);
+                if(temp != ERROR)
+                    cout << "删除成功！" << endl;
+                else
+                    cout << "该线性表不在该线性表组中" << endl;
+                free(s);
+                break;
+            }
+            case 22:
+            {
+                cout << "线性表组如下" << endl;
+                int temp = ShowList(Lists);
+                if(temp == 0)   
+                    cout << "该线性表组为空" << endl;
+                break;
+            }
+            case 23:
+            {
+                int temp;
+                cout << "请输入要切换的线性表的序号" << endl;
+                cin >> temp;
+                int temp1 = SwitchList(Lists,temp,L);
+                if(temp1 == OK) 
+                    cout << "切换成功" << endl;
+                else    
+                    cout << "输入了错误的序号" << endl;
+                break;
+            }
+            case 24:
+            {
+                int temp;
+                cout << "将线性表组中的某一线性表更新为该线性表" << endl;
+                cout << "请输入要更新的线性表的序号" << endl;
+                cin >> temp;
+                int temp1 = UpdateList(Lists,temp,L);
+                if(temp1 == OK) 
+                    cout << "更新成功" << endl;
+                else    
+                    cout << "输入了错误的序号" << endl;
                 break;
             }
         }

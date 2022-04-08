@@ -208,7 +208,7 @@ status  LoadList(SqList &L,char FileName[])
     }
 }
 
-status AddList(LISTS &Lists,char ListName[])
+status AddList_1(LISTS &Lists,char ListName[])
 {
     SqList temp;
     temp.elem = (int *)malloc(sizeof(int) * LIST_INIT_SIZE);
@@ -219,6 +219,13 @@ status AddList(LISTS &Lists,char ListName[])
     return OK;
 }
 
+int AddList_2(LISTS &Lists,char ListName[],SqList &L)
+{
+    if(!L.elem) return INFEASIBLE;
+    Lists.elem[Lists.length++].L = L;
+    strcpy(Lists.elem[Lists.length-1].name,ListName);
+    return OK;
+}
 status RemoveList(LISTS &Lists,char ListName[])
 {
     for(int i = 0; i < Lists.length; i++)
@@ -293,4 +300,37 @@ int SortList(SqList L)
     else
         std::sort(L.elem,L.elem + L.length);
     return OK;
+}
+
+int ShowList(LISTS Lists)
+{
+    if(Lists.length == 0)   return ERROR;
+    else
+    {
+        for(int i = 1; i <= Lists.length; i++)
+            printf("%d %s\n",i,Lists.elem[i - 1].name);
+        return OK;
+    }
+}
+
+int SwitchList(LISTS Lists,int i,SqList &L)
+{
+    if(i <= 0 or i > Lists.length)  return ERROR;
+    else
+    {
+        L = Lists.elem[i - 1].L;
+        return OK;
+    }
+}
+
+int UpdateList(LISTS &Lists,int i, SqList &L)
+{
+    if(i <= 0 or i > Lists.length)  return ERROR;
+    else
+    {
+        Lists.elem[i - 1].L.elem = L.elem;
+        Lists.elem[i - 1].L.length = L.length;
+        Lists.elem[i - 1].L.listsize = L.listsize;
+        return OK;
+    }
 }
