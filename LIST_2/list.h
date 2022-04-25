@@ -473,6 +473,7 @@ status RemoveList(ListsGroup Lists,char ListName[])
             free(temp);
             return OK;
         }
+        temp = temp->next;
     }
     return ERROR;
 }
@@ -492,6 +493,7 @@ int LocateList(ListsGroup Lists,char ListName[])
     {
         if(strcmp(temp->L.name,ListName) == 0)
             return cnt+1;
+        temp = temp->next;
         cnt++;
     }
     return 0;

@@ -5,7 +5,14 @@
 		},
 		{
 			"path": "../../下载/Level-Hashing-master"
+		},
+		{
+			"path": "../../文档/2021级-数据结构实验内容与要求（给学生）/DataLatex"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"files.associations": {
+			"ostream": "cpp"
+		}
+	}
 }
