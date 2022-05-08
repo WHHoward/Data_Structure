@@ -12,7 +12,11 @@
 	],
 	"settings": {
 		"files.associations": {
-			"ostream": "cpp"
+			"ostream": "cpp",
+			"stack": "cpp",
+			"csignal": "cpp",
+			"limits": "cpp",
+			"shared_mutex": "cpp"
 		}
 	}
 }
