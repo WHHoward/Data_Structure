@@ -13,18 +13,18 @@ int main()
         printf("      Menu for Linear Table On Sequence Structure \n");
 	    printf("-------------------------------------------------\n");
 	    printf("    	  1. CreateBitree       7. Assign\n");
-	    printf("    	  2. DestroyBitree    8. GetSibling\n");
-	    printf("    	  3. ClearBitree      9. InsertNode \n");
-	    printf("    	  4. BitreeEmpty      10. DeleteNode\n");
-	    printf("    	  5. BitreeDepth    11. PreOrderTraverse\n");
-	    printf("    	  6. LocateNode        12. InOrderTraverse\n");
-        printf("          13. PostOrderTraverse   14.LevelOrderTraverse\n");
-        printf("          15.SortList       16.SaveList\n");
-        printf("          17.LoadList       18.AddList_1\n");
-        printf("          19.AddList_2      20.LocateList\n");
-        printf("          21.RemoveList     22.ShowList\n");
-        printf("          23.SwitchList     24.UpdateList\n");
-	    printf("    	  0. Exit\n");
+	    printf("    	  2. DestroyBitree      8. GetSibling\n");
+	    printf("    	  3. ClearBitree        9. InsertNode \n");
+	    printf("    	  4. BitreeEmpty        10. DeleteNode\n");
+	    printf("    	  5. BitreeDepth        11. PreOrderTraverse\n");
+	    printf("    	  6. LocateNode         12. InOrderTraverse\n");
+        printf("          13.PostOrderTraverse  14.LevelOrderTraverse\n");
+        printf("          15.MaxPathSum         16.LowestCommonAncestor\n");
+        printf("          17.InvertTree         18.SaveBitree\n");
+        printf("          19.LoadBitree         20.AddBiTree1\n");
+        printf("          21.AddBiTree2         22.DeleteBiTree\n");
+        printf("          23.ShowBiTree         24.UpdateBiTree\n");
+	    printf("    	  25.SwitchBiTree       0. Exit\n");
 	    printf("-------------------------------------------------\n");
 	    printf("    请选择你的操作[0~24]:");
         cin >> op;
@@ -244,6 +244,132 @@ int main()
                     ans = MaxPathSum(T);
                     cout << "最大路径和为: " << ans << endl;
                 }
+                break;
+            }
+            case 16:
+            {
+                KeyType e1,e2;
+                if(!T)  cout << "二叉树不存在" << endl;
+                else
+                {
+                    cin >> e1 >> e2;
+                    BiTree temp;
+                    temp = LowestCommonAncestor(T,e1,e2);
+                    cout << "最近公共祖先如下:" << endl << temp->data.key << " " << temp->data.others << endl;
+                }
+                break;
+            }
+            case 17:
+            {
+                status temp = InvertTree(T);
+                if(temp == INFEASIBLE)
+                    cout << "二叉树不存在" << endl;
+                else
+                    cout << "二叉树翻转完成" << endl;
+                break;
+            }
+            case 18:
+            {
+                char *s;
+                cout << "请输入你要保存的文件的名字" << endl;
+                s = (char *)malloc(sizeof(char) * 100);
+                cin >> s;
+                int temp = SaveBiTree(T,s);
+                if(temp == INFEASIBLE)
+                    cout << "二叉树不存在" << endl;
+                else
+                    if(temp == ERROR)
+                        cout << "文件打开失败" << endl;
+                    else
+                        cout << "保存成功" << endl;
+                free(s);
+                break;
+            }
+            case 19:
+            {
+                char *s;
+                cout << "请输入你要保存的文件的名字" << endl;
+                s = (char *)malloc(sizeof(char) * 100);
+                cin >> s;
+                int temp = LoadBiTree(T,s);
+                if(temp == INFEASIBLE)
+                    cout << "二叉树已存在,无法加载" << endl;
+                else
+                    if(temp == ERROR)
+                        cout << "文件打开失败" << endl;
+                    else
+                        cout << "加载成功" << endl;
+                free(s);
+                break;
+            }
+            case 20:
+            {
+                char *s;
+                cout << "请输入你要保存的空的二叉树的名字" << endl;
+                s = (char *)malloc(sizeof(char) * 100);
+                cin >> s;
+                AddBiTree_1(s);
+                free(s);
+                cout << "插入成功" << endl;
+                break;
+            }
+            case 21:
+            {
+                char *s;
+                cout << "请输入你要保存的二叉树的名字" << endl;
+                s = (char *)malloc(sizeof(char) * 100);
+                cin >> s;
+                AddBiTree_2(T,s);
+                free(s);
+                cout << "插入成功" << endl;
+                break;
+            }
+            case 22:
+            {
+                char *s;
+                cout << "请输入你要删除二叉树的名字" << endl;
+                s = (char *)malloc(sizeof(char) * 100);
+                cin >> s;
+                int temp = DeleteBiTree(s);
+                free(s);
+                if(temp == OK)
+                    cout << "删除成功" << endl;
+                else
+                    cout << "该二叉树不存在" << endl;
+                break;
+            }
+            case 23:
+            {
+                cout << "二叉树组如下" << endl;
+                ShowBiTree();
+                break;
+            }
+            case 24:
+            {
+                char *s;
+                cout << "请输入你要更新的二叉树的名字" << endl;
+                s = (char *)malloc(sizeof(char) * 100);
+                cin >> s;
+                int temp = UpdateBiTree(T,s);
+                free(s);
+                if(temp == OK)
+                    cout << "更新成功" << endl;
+                else
+                    cout << "该二叉树不存在" << endl;
+                break;
+            }
+            case 25:
+            {
+                cout << "请输入你要切换二叉树的名字" << endl;
+                char *s;
+                s = (char *)malloc(sizeof(char) * 100);
+                cin >> s;
+                int temp = SwitchBiTree(T,s);
+                free(s);
+                if(temp == OK)
+                    cout << "切换成功" << endl;
+                else
+                    cout << "该二叉树不存在" << endl;
                 break;
             }
             default:

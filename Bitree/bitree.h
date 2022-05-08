@@ -1,5 +1,6 @@
 #include "def.h"
 //1 a 2 b 0 null  0 null 3 c 4 d  0 null  0 null 5 e  0 null  0 null -1 null
+//1 a 3 b 0 null 0 null 4 d 5 e 0 null 0 null -7 f 0 null 20 g 0 null 0 null -1 null
 int check[1000];
 int cc[1000];
 int cnt = 0;
@@ -455,4 +456,178 @@ int MaxPathSum(BiTree T)
     if(temp3 < 0)   return T->data.key;
     if(temp3 + T->data.key >= 0)    return T->data.key + temp3;
     return T->data.key + temp3;
+}
+int LCA(BiTree T,KeyType e1,KeyType e2,BiTree &ans,int &flag);
+BiTNode* LowestCommonAncestor(BiTree T,KeyType e1,KeyType e2)
+{
+    if(!T)  return NULL;
+    BiTree ans;
+    int flag = 0;
+    LCA(T,e1,e2,ans,flag);
+    return ans;
+}
+int LCA(BiTree T,KeyType e1,KeyType e2,BiTree &ans,int &flag)
+{
+    if(!T)  return 0;
+    int temp_cnt = 0;
+    int signal = 0;
+    if(T->data.key == e1 or T->data.key == e2)  
+        temp_cnt++;
+    temp_cnt += LCA(T->lchild,e1,e2,ans,flag) + LCA(T->rchild,e1,e2,ans,flag);
+    if(temp_cnt == 2)
+    {
+        if(!flag)
+        {
+            flag = 1;
+            ans = T;
+        }
+    }
+    return temp_cnt;
+}
+
+status InvertTree(BiTree &T)
+{
+    if(!T)  return INFEASIBLE;
+    InvertTree(T->lchild);
+    InvertTree(T->rchild);
+    BiTree temp;
+    temp = T->lchild;
+    T->lchild = T->rchild;
+    T->rchild = temp;
+    return OK;
+}
+
+std:: stack<BiTree> ss;
+TElemType tempdefinition[200];
+char *tempname;
+status SaveBiTree(BiTree T, char FileName[])
+//将二叉树的结点数据写入到文件FileName中
+{
+    // 请在这里补充代码，完成本关任务
+    /********** Begin 1 *********/
+    FILE *p;
+    p = fopen(FileName,"w+");
+    if(!T)  return INFEASIBLE;
+    if(!p)  return ERROR;
+    while(!ss.empty())  ss.pop();
+    ss.push(T);
+    while(!ss.empty())
+    {
+        BiTree temp;
+        temp = ss.top();
+        ss.pop();
+        if(!temp)
+        {
+            TElemType* ttemp;
+            ttemp = (TElemType*)malloc(sizeof(TElemType));
+            ttemp->key = 0;
+            ttemp->others[0] = 'n';
+            fwrite(ttemp,sizeof(TElemType),1,p);
+            continue;
+        }
+        fwrite(&temp->data,sizeof(TElemType),1,p);
+        ss.push(temp->rchild);
+        ss.push(temp->lchild);
+    }
+    TElemType* ttemp;
+    ttemp = (TElemType*)malloc(sizeof(TElemType));
+    ttemp->key = -1;
+    ttemp->others[0] = 'n';
+    fwrite(ttemp,sizeof(TElemType),1,p);
+    fclose(p);
+    return OK;
+    /********** End 1 **********/
+}
+
+status LoadBiTree(BiTree &T,  char FileName[])
+{
+    memset(tempdefinition,0,sizeof(tempdefinition));
+    if(T)   return INFEASIBLE;
+    FILE *p;
+    //T = (BiTree)malloc(sizeof(BiTNode));
+    p = fopen(FileName,"r+");
+    if(!p)  return ERROR;
+    TElemType temp;
+    cnt = 0;
+    while(fread(&temp,sizeof(temp),1,p))
+        tempdefinition[cnt++] = temp;
+    int flag = 0;
+    flag = CreateBiTree(T,tempdefinition);
+    fclose(p);
+    return OK;
+}
+
+void AddBiTree_1(char name[])
+{
+    BiTree temp;
+    temp = (BiTree)malloc(sizeof(BiTNode));
+    Ts[num_t].T = NULL;
+    strcpy(Ts[num_t].name,name);
+    num_t++;
+    return ;
+}
+
+void AddBiTree_2(BiTree T,char name[])
+{
+    Ts[num_t].T = T;
+    strcpy(Ts[num_t].name,name);
+    num_t++;
+    return ;
+}
+
+status DeleteBiTree(char name[])
+{
+    int flag = 0;
+    for(int i = 0; i < num_t; i++)
+    {
+        if(strcmp(Ts[i].name,name) == 0)
+        {
+            for(int j = i; j < num_t - 1; j++)
+                Ts[i] = Ts[i + 1];
+            num_t--;
+            flag = 1;
+            break;
+        }
+    }
+    if(flag)    return OK;
+    return ERROR;
+}
+
+void ShowBiTree()
+{
+    for(int i = 0; i < num_t; i++)
+        std::cout << i + 1 << " " << Ts[i].name << std::endl;
+    return ;
+}
+
+status UpdateBiTree(BiTree T,char name[])
+{
+    int flag = 0;
+    for(int i = 0; i < num_t; i++)
+    {
+        if(strcmp(Ts[i].name,name) == 0)
+        {
+            Ts[i].T = T;
+            flag = 1;
+            break;
+        }
+    }
+    if(flag)    return OK;
+    return ERROR;
+}
+
+status SwitchBiTree(BiTree &T,char name[])
+{
+    int flag = 0;
+    for(int i = 0; i < num_t; i++)
+    {
+        if(strcmp(Ts[i].name,name) == 0)
+        {
+            T = Ts[i].T;
+            flag = 1;
+            break;
+        }
+    }
+    if(flag)    return OK;
+    return ERROR;
 }
