@@ -16,7 +16,26 @@ void show(BiTree &T)
     show(T->rchild);
     return ; 
 }
-status CreateBiTree(BiTree &T,TElemType definition[])
+status CreateBiTree(BiTree &T,DEF definition[])
+{
+    int i=0,j;
+    static BiTNode *p[100];
+    while (j=definition[i].pos)
+    {
+    	 p[j]=(BiTNode *)malloc(sizeof(BiTNode));
+       p[j]->data=definition[i].data;
+       p[j]->lchild=NULL;
+       p[j]->rchild=NULL;
+       if (j!=1)
+       		if (j%2)   p[j/2]->rchild=p[j];  
+       	   else      p[j/2]->lchild=p[j];
+       i++;
+    }
+    T=p[1];
+    return OK;
+}
+
+status MyCreateBiTree(BiTree &T,TElemType definition[])
 /*根据带空枝的二叉树先根遍历序列definition构造一棵二叉树，将根节点指针赋值给T并返回OK，如果有相同的关键字，返回ERROR。此题允许通过增加其它函数辅助实现本关任务*/
 {
     if(T)   return INFEASIBLE;
@@ -552,7 +571,7 @@ status LoadBiTree(BiTree &T,  char FileName[])
     while(fread(&temp,sizeof(temp),1,p))
         tempdefinition[cnt++] = temp;
     int flag = 0;
-    flag = CreateBiTree(T,tempdefinition);
+    flag = MyCreateBiTree(T,tempdefinition);
     fclose(p);
     return OK;
 }

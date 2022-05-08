@@ -35,13 +35,12 @@ int main()
             case 1:
             {
                 cout << "构建一个二叉树" << endl;
-                TElemType definition[100];
-                int cnt = 0;
-                while(1)
+                DEF definition[100];
+                int i = 0;
+                do 
                 {
-                    cin >> definition[cnt].key >> definition[cnt++].others;
-                    if(definition[cnt - 1].key == -1)   break;
-                }
+	                scanf("%d%d%s",&definition[i].pos,&definition[i].data.key,definition[i].data.others);
+                } while (definition[i++].pos);
                 int temp = CreateBiTree(T,definition);
                 if(temp == INFEASIBLE)  cout << "二叉树已存在" << endl;
                 else
@@ -50,7 +49,7 @@ int main()
                         cout << "关键字不唯一" << endl;
                     else    
                     {
-                        show(T);
+                        //show(T);
                         cout << "二叉树创建成功" << endl;
                     }        
                 }

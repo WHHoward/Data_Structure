@@ -27,3 +27,8 @@ struct trees
 	BiTree T;
 	char name[30];
 }Ts[300];
+
+typedef struct {
+    int pos;
+    TElemType data; 
+} DEF;
