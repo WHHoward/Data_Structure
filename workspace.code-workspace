@@ -16,7 +16,10 @@
 			"stack": "cpp",
 			"csignal": "cpp",
 			"limits": "cpp",
-			"shared_mutex": "cpp"
+			"shared_mutex": "cpp",
+			"array": "cpp",
+			"string": "cpp",
+			"string_view": "cpp"
 		}
 	}
 }

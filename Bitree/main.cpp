@@ -128,7 +128,7 @@ int main()
                 else
                 {
                     if(temp == ERROR)   
-                        cout << "节点不存在" << endl;
+                        cout << "节点不存在 或 关键字重复" << endl;
                     else    
                         cout << "赋值完成" << endl;
                 }

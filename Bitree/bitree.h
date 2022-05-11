@@ -240,7 +240,8 @@ status Assign(BiTree &T,KeyType e,TElemType value)
     /********** Begin *********/
     if(!T)  return INFEASIBLE;
     int cnt = 0;
-    Check(T->lchild,value.key,cnt);
+    Check(T,value.key,cnt);
+    if(e == value.key)  cnt--;
     if(cnt >= 1)    return ERROR;
     return temp_Assign(T,e,value);
     /********** End **********/
