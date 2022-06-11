@@ -17,15 +17,15 @@ int main()
     {
         printf("      Menu for Linear Table On Sequence Structure \n");
 	    printf("-------------------------------------------------\n");
-	    printf("    	  1.CreateGs[NUM]raph     7.InsertVex\n");
-	    printf("    	  2.DestroyGs[NUM]raph    8.DeleteVex\n");
+	    printf("    	  1.CreateGraph     7.InsertVex\n");
+	    printf("    	  2.DestroyGraph    8.DeleteVex\n");
 	    printf("    	  3.LocateVex       9.InsertArc \n");
 	    printf("    	  4.PutVex          10.DeleteArc\n");
 	    printf("    	  5.FirstAdjVex     11.DFSTraverse\n");
 	    printf("    	  6.NextAdjVex      12.BFSTraverse\n");
-        printf("          13.SaveGs[NUM]raph      14.LoadGs[NUM]raph\n");
+        printf("          13.SaveGraph      14.LoadGraph\n");
         printf("          15.VerticesSetLessThanK\n");
-        printf("          16.ShortestPathLenGs[NUM]th\n");
+        printf("          16.ShortestPathLenGth\n");
         printf("          17.ConnectedComponentsNums\n");
 	    printf("    	  0. Exit\n");
 	    printf("-------------------------------------------------\n");
